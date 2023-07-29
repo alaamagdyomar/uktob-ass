@@ -16,7 +16,7 @@ export const fetchAllPokemon = () => async (dispatch) => {
     );
     dispatch(getPokemonDatabase(allPokemonData));
   } catch (error) {
-    // Dispatch an error action if needed
+        console.log('Error :' , error)   
   }
 };
 
@@ -28,7 +28,7 @@ export const fetchPokemon = (name) => async (dispatch) => {
     const data = await res.json();
     dispatch(getPokemon(data));
   } catch (error) {
-    // Dispatch an error action if needed
+    console.log('Error :' , error)   
   }
 };
 
@@ -40,7 +40,7 @@ export const fetchPokemonDatabase = () => async (dispatch) => {
     const data = await res.json();
     dispatch(getPokemonDatabase(data.results));
   } catch (error) {
-    // Dispatch an error action if needed
+    console.log('Error :' , error)   
   }
 };
 
@@ -58,11 +58,9 @@ export const fetchNextPage = () => async (dispatch, getState) => {
     const newPokemonData = await Promise.all(
       data.results.map((pokemon) => fetch(pokemon.url).then((res) => res.json()))
     );
-    // Dispatch success action with the fetched data
-    // (Note: You may want to store the data in a normalized format or separate the fetching logic)
-    dispatch(getPokemonDatabase(newPokemonData));
+       dispatch(getPokemonDatabase(newPokemonData));
   } catch (error) {
-    // Dispatch an error action if needed
+    console.log('Error :' , error)   
   }
 };
 
