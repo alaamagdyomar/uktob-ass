@@ -17,23 +17,33 @@ const pokemonSlice = createSlice({
       state.loading = true;
     },
     getAllPokemon(state, action) {
-      // ... (Copy the entire getAllPokemon reducer from the previous code snippet)
+      state.allPokemon = action.payload;
+      state.next = action.payload.next;
+      state.loading = false;
     },
     getPokemon(state, action) {
-      // ... (Copy the entire getPokemon reducer from the previous code snippet)
+      state.pokemon = action.payload;
+      state.loading = false;
     },
     getPokemonDatabase(state, action) {
-      // ... (Copy the entire getPokemonDatabase reducer from the previous code snippet)
+      state.pokemonDataBase = [ ...state.pokemonDataBase , ...action.payload ];
+      state.allPokemon = [...state.pokemonDataBase, ...action.payload];
+      state.loading = false;
     },
     getSearch(state, action) {
-      // ... (Copy the entire getSearch reducer from the previous code snippet)
+      state.searchResults = action.payload; 
+      state.pokemonDataBase = action.payload;   
+      state.loading = false;
     },
     nextPage(state, action) {
-      // ... (Copy the entire nextPage reducer from the previous code snippet)
+      state.allPokemon = [...state.allPokemon, ...action.payload.results];
+      state.next = action.payload.next;
+      state.loading = false;
     },
   },
 });
 
 export const { loading, getAllPokemon, getPokemon, getPokemonDatabase, getSearch, nextPage } = pokemonSlice.actions;
+
 
 export default pokemonSlice.reducer;
